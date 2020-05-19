@@ -1,0 +1,27 @@
+{
+  "name": "haxxbot",
+  "version": "1.0.0",
+  "description": "A Discord Bot, which will free ProfHaxx some time (probably)",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ProfHaxx/HaxxBot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot",
+    "js"
+  ],
+  "author": "ProfHaxx",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ProfHaxx/HaxxBot/issues"
+  },
+  "homepage": "https://github.com/ProfHaxx/HaxxBot#readme",
+  "dependencies": {
+    "discord.js": "^12.2.0"
+  }
+}
