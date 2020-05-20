@@ -23,5 +23,6 @@
   "homepage": "https://github.com/ProfHaxx/HaxxBot#readme",
   "dependencies": {
     "discord.js": "^12.2.0"
-  }
+  },
+  "type": "module"
 }

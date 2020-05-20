@@ -1,9 +1,12 @@
-const {Client} = require('discord.js');
-const constant = require('./constants');
+import { Client } from 'discord.js';
+import {_token, _getGreeting, _day } from '../HaxxBot/constants.js';
 
 const client = new Client();
 
-const token = constant.token;
+const token = _token;
+const getGreeting = _getGreeting;
+const day = _day;
+
 const name = 'Hydrogen';
 const version = "1.0";
 
@@ -34,12 +37,12 @@ function createDate(hour, min, sec) {
  * @param {Date} dateObj Given Date Object
  */
 function whereIsProfHaxx(dateObj) {
-
+    
     if(inTime(dateObj, createDate(0,0,0), createDate(6,30,0))) return "@ProfHaxx is probably still asleep.";
     if(inTime(dateObj, createDate(22,15,0), createDate(23,59,59))) return "@ProfHaxx is probably trying to sleep now.";
 
-    day = dateObj.getDay();
-    if(day == 1) { //Monday
+    var dayNum = dateObj.getDay();
+    if(dayNum == 1) { //Monday
         if(inTime(dateObj, createDate(6,30,0), createDate(7,30,0))) return "@ProfHaxx is probably preparing to get to school.";
         if(inTime(dateObj, createDate(7,30,0), createDate(8,0,0))) return "@ProfHaxx is probably on his way to school.";
         if(inTime(dateObj, createDate(8,0,0), createDate(13,15,0))) return "@ProfHaxx is probably at school.";
@@ -49,7 +52,7 @@ function whereIsProfHaxx(dateObj) {
         if(inTime(dateObj, createDate(17,0,0), createDate(20,0,0))) return "@ProfHaxx is probably at school.";
         if(inTime(dateObj, createDate(20,0,0), createDate(21,0,0))) return "@ProfHaxx is probably on his way back home.";
         if(inTime(dateObj, createDate(21,0,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
-    } else if(day == 2) { //Tuesday
+    } else if(dayNum == 2) { //Tuesday
         if(inTime(dateObj, createDate(6,30,0,0), createDate(8,30,0))) return "@ProfHaxx is probably still asleep.";
         if(inTime(dateObj, createDate(8,30,0), createDate(9,15,0))) return "@ProfHaxx is probably eating, programming or doing something else.";
         if(inTime(dateObj, createDate(9,15,0), createDate(9,50,0))) return "@ProfHaxx is probably on his way to school.";
@@ -57,15 +60,15 @@ function whereIsProfHaxx(dateObj) {
         if(inTime(dateObj, createDate(13,15,0), createDate(13,45,0))) return "@ProfHaxx is probably on his way back home. (Depending on whether he walks or drives home he'll be back at either ~1.45 PM or ~2.30 PM)";
         if(inTime(dateObj, createDate(13,45,0), createDate(21,45,0))) return "@ProfHaxx is most likely at home.";
         if(inTime(dateObj, createDate(21,45,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
-    } else if(day == 3) { //Wednesday
+    } else if(dayNum == 3) { //Wednesday
         if(inTime(dateObj, createDate(6,30,0,0), createDate(8,30,0))) return "@ProfHaxx is probably still asleep.";
         if(inTime(dateObj, createDate(8,30,0), createDate(11,15,0))) return "@ProfHaxx is probably eating, programming or doing something else.";
         if(inTime(dateObj, createDate(11,15,0), createDate(11,45,0))) return "@ProfHaxx is probably on his way to school.";
-        if(inTime(dateObj, createDate(11,45,0), createDate(14,05,0))) return "@ProfHaxx is probably at school.";
-        if(inTime(dateObj, createDate(14,05,0), createDate(14,50,0))) return "@ProfHaxx is probably on his way back home. (Depending on whether he walks or drives home he'll be back at either ~1.45 PM or ~2.30 PM)";
+        if(inTime(dateObj, createDate(11,45,0), createDate(14,5,0))) return "@ProfHaxx is probably at school.";
+        if(inTime(dateObj, createDate(14,5,0), createDate(14,50,0))) return "@ProfHaxx is probably on his way back home. (Depending on whether he walks or drives home he'll be back at either ~1.45 PM or ~2.30 PM)";
         if(inTime(dateObj, createDate(14,50,0), createDate(21,45,0))) return "@ProfHaxx is most likely at home.";
         if(inTime(dateObj, createDate(21,45,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
-    } else if(day == 4) { //Thursday
+    } else if(dayNum == 4) { //Thursday
         if(inTime(dateObj, createDate(6,30,0), createDate(7,30,0))) return "@ProfHaxx is probably preparing to get to school.";
         if(inTime(dateObj, createDate(7,30,0), createDate(8,0,0))) return "@ProfHaxx is probably on his way to school.";
         if(inTime(dateObj, createDate(8,0,0), createDate(14,5,0))) return "@ProfHaxx is probably at school.";
@@ -74,7 +77,7 @@ function whereIsProfHaxx(dateObj) {
         if(inTime(dateObj, createDate(18,45,0), createDate(20,30,0))) return "@ProfHaxx is learning actual math.";
         if(inTime(dateObj, createDate(20,30,0), createDate(21,45,0))) return "@ProfHaxx is probably at home.";
         if(inTime(dateObj, createDate(21,45,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
-    } else if(day == 5) { //Friday
+    } else if(dayNum == 5) { //Friday
         if(inTime(dateObj, createDate(6,30,0), createDate(7,30,0))) return "@ProfHaxx is probably preparing to get to school.";
         if(inTime(dateObj, createDate(7,30,0), createDate(8,0,0))) return "@ProfHaxx is probably on his way to school.";
         if(inTime(dateObj, createDate(8,0,0), createDate(9,30,0))) return "@ProfHaxx is probably at school.";
@@ -85,7 +88,7 @@ function whereIsProfHaxx(dateObj) {
         if(inTime(dateObj, createDate(18,45,0), createDate(20,30,0))) return "@ProfHaxx is probably organizing a lecture.";
         if(inTime(dateObj, createDate(20,30,0), createDate(21,45,0))) return "@ProfHaxx is probably at home.";
         if(inTime(dateObj, createDate(21,45,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
-    } else if(day == 6) { //Saturday
+    } else if(dayNum == 6) { //Saturday
         if(inTime(dateObj, createDate(6,30,0,0), createDate(8,30,0))) return "@ProfHaxx is probably still asleep.";
         if(inTime(dateObj, createDate(8,30,0), createDate(11,40,0))) return "@ProfHaxx is doing whatever he wants.";
         if(inTime(dateObj, createDate(11,40,0), createDate(12,30,0))) return "@ProfHaxx is probably on his way to school.";
@@ -93,7 +96,7 @@ function whereIsProfHaxx(dateObj) {
         if(inTime(dateObj, createDate(14,0,0), createDate(14,45,0))) return "@ProfHaxx is on his way back home.";
         if(inTime(dateObj, createDate(14,45,0), createDate(21,45,0))) return "@ProfHaxx is most likely at home.";
         if(inTime(dateObj, createDate(21,45,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
-    } else if(day == 0) { //Sunday
+    } else if(dayNum == 0) { //Sunday
         if(inTime(dateObj, createDate(6,30,0,0), createDate(8,30,0))) return "@ProfHaxx is probably still asleep.";
         if(inTime(dateObj, createDate(8,30,0), createDate(21,45,0))) return "@ProfHaxx is doing whatever he wants.";
         if(inTime(dateObj, createDate(21,45,0), createDate(22,15,0))) return "@ProfHaxx is probably eating and preparing to sleep.";
@@ -120,10 +123,15 @@ client.on('message', msg => {
                 } else {
                     switch(args[1]) {
                         case 'whois':
-                            msg.reply(`A command dedicated to output certain data about a user or the bot.`);
+                            msg.reply(`A command dedicated to output certain data about a user or the bot.\n`+
+                            `An example would be: "!whois bot" or "!whois ProfHaxx".`);
                             break;
                         case 'profhaxx':
-                            msg.reply(`A command dedicated to output certain data, such as the current location of ProfHaxx with the probability of 80%.`);
+                            msg.reply(`A command dedicated to output certain data, such as the current location of ProfHaxx with the probability of 80%.\n` + 
+                            `To find out where @ProfHaxx currently is you can use "${prefix}profhaxx location".`);
+                            break;
+                        case 'day':
+                            msg.reply(`The 'day' Utility can be used to find out things about dates. E.g. you can see what's special about the 21.7 by typing "${prefix}day 21.7"`);
                             break;
                         default:
                             msg.reply(`Command ${args[1]} not found!`);
@@ -137,7 +145,7 @@ client.on('message', msg => {
                 } else {
                     switch(args[1]) {
                         case 'bot':
-                            msg.reply(`${constant.getGreeting()} ${msg.author.username}, I am ${name}.`);
+                            msg.reply(`${getGreeting()} ${msg.author.username}, I am ${name} and we're at v${version}.`);
                             break;
                         case 'ProfHaxx':
                             msg.reply(`@ProfHaxx is an mysterious, not yet classified entity. There is not much information about it.`);
@@ -157,9 +165,15 @@ client.on('message', msg => {
                     }
                 }
                 break;
+            case 'day':
+                if(args.length <= 1) {
+                    msg.reply("Requires a date as an argument. E.g: 29.05");
+                } else {
+                    msg.reply(day(args[1].split(".")[0], args[1].split(".")[1]));
+                }
             case 'profhaxx':
                 if(args.length <= 1) {
-                    msg.reply(`${constant.getGreeting()} ${msg.author.username}! @ProfHaxx is my active Developer. What do you want to know?`);
+                    msg.reply(`${getGreeting()} ${msg.author.username}! @ProfHaxx is my active Developer. What do you want to know?`);
                 } else {
                     switch(args[1]) {
                         case 'location':
@@ -173,13 +187,17 @@ client.on('message', msg => {
                     }
                 }
                 break;
+            case 'help':
+                msg.reply(`This is just a list of all available commands. To get further information for a command use: \"${prefix}man command\"\n` + 
+                `man - Quick Reference for all Commands\nwhois - Who is $User?\nday - What's at day.month? \nprofhaxx - What's the dev doing?\n`);
+                break;
             default:
                 msg.reply('Maybe a typo, maybe not... In either case: I couldn\'t understand you.');
         }
     } else if(msg.content.includes(name)) {
         msg.reply(
-            `${constant.getGreeting()} ${msg.author.username}. I don't think that I understood you. You may ask @ProfHaxx if he can translate it to me.\n` + 
-            `At the moment I understand following commands (with the prefix ${prefix}): man, whois, profhaxx. I am really basic and still ` + 
+            `${getGreeting()} ${msg.author.username}. I don't think that I understood you. You may ask @ProfHaxx if he can translate it to me.\n` + 
+            `You can get a list of supported commands by typing ${prefix}help. I am really basic and still ` + 
             `in W.I.P. state. My Current Version is: ${version}.`
             );
     }
