@@ -1,10 +1,13 @@
 import { Client } from 'discord.js';
-import {_token, _getGreeting, _day } from '../HaxxBot/constants.js';
+import {_token, _getGreeting, _day, _getRandomJoke, _getRandomQuote, _getRandomRiddle } from '../HaxxBot/constants.js';
 
 const client = new Client();
 
 const token = _token;
 const getGreeting = _getGreeting;
+const getRandomJoke = _getRandomJoke;
+const getRandomQuote = _getRandomQuote;
+const getRandomRiddle = _getRandomRiddle;
 const day = _day;
 
 const name = 'Hydrogen';
@@ -133,6 +136,9 @@ client.on('message', msg => {
                         case 'day':
                             msg.reply(`The 'day' Utility can be used to find out things about dates. E.g. you can see what's special about the 21.7 by typing "${prefix}day 21.7"`);
                             break;
+                        case 'tellme':
+                            msg.reply(`The 'tellme' Utility can be used to get a joke / quote / riddle. E.g. you can get a joke by typing "${prefix}tellme joke"`);
+                            break;
                         default:
                             msg.reply(`Command ${args[1]} not found!`);
                             break;
@@ -187,19 +193,40 @@ client.on('message', msg => {
                     }
                 }
                 break;
+            case 'tellme':
+                if(args.length <= 1) {
+                    msg.reply(`${getGreeting()} ${msg.author.username}! What shall I tell you :)?`);
+                } else {
+                    switch(args[1]) {
+                        case 'joke':
+                            msg.reply(`${getRandomJoke()}`);
+                            break;
+                        case 'quote':
+                            msg.reply(`${getRandomQuote()}`);
+                            break;
+                        case 'riddle':
+                            msg.reply(`${getRandomRiddle()}`);
+                            break;
+                    }
+                }
+                break;
             case 'help':
                 msg.reply(`This is just a list of all available commands. To get further information for a command use: \"${prefix}man command\"\n` + 
-                `man - Quick Reference for all Commands\nwhois - Who is $User?\nday - What's at day.month? \nprofhaxx - What's the dev doing?\n`);
+                `man - Quick Reference for all Commands\nwhois - Who is $User?\nday - What's at day.month? \nprofhaxx - What's the dev doing?\ntellme - Entertainment and Facts.\n`);
                 break;
             default:
                 msg.reply('Maybe a typo, maybe not... In either case: I couldn\'t understand you.');
         }
     } else if(msg.content.includes(name)) {
-        msg.reply(
-            `${getGreeting()} ${msg.author.username}. I don't think that I understood you. You may ask @ProfHaxx if he can translate it to me.\n` + 
-            `You can get a list of supported commands by typing ${prefix}help. I am really basic and still ` + 
-            `in W.I.P. state. My Current Version is: ${version}.`
-            );
+        if(msg.content.includes("Who") && msg.content.includes("smartest")) {
+            msg.reply(`Yooouuuu!`);
+        } else {
+            msg.reply(
+                `${getGreeting()} ${msg.author.username}. I don't think that I understood you. You may ask @ProfHaxx if he can translate it to me.\n` + 
+                `You can get a list of supported commands by typing ${prefix}help. I am really basic and still ` + 
+                `in W.I.P. state. My Current Version is: ${version}.`
+                );
+        }
     }
 });
 
