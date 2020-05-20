@@ -125,6 +125,9 @@ client.on('message', msg => {
                         case 'profhaxx':
                             msg.reply(`A command dedicated to output certain data, such as the current location of ProfHaxx with the probability of 80%.`);
                             break;
+                        default:
+                            msg.reply(`Command ${args[1]} not found!`);
+                            break;
                     }
                 }
                 break;
@@ -134,7 +137,7 @@ client.on('message', msg => {
                 } else {
                     switch(args[1]) {
                         case 'bot':
-                            msg.reply(`Hi ${msg.author.username}, I am ${name}.`);
+                            msg.reply(`${constant.getGreeting()} ${msg.author.username}, I am ${name}.`);
                             break;
                         case 'ProfHaxx':
                             msg.reply(`@ProfHaxx is an mysterious, not yet classified entity. There is not much information about it.`);
@@ -153,12 +156,12 @@ client.on('message', msg => {
                 break;
             case 'profhaxx':
                 if(args.length <= 1) {
-                    msg.reply(`Hey ${msg.author.username}! @ProfHaxx is my active Developer. What do you want to know?`);
+                    msg.reply(`${constant.getGreeting()} ${msg.author.username}! @ProfHaxx is my active Developer. What do you want to know?`);
                 } else {
                     switch(args[1]) {
                         case 'location':
                             if(args.length == 2) {
-                                whereIsProfHaxx(new Date());
+                                msg.reply(whereIsProfHaxx(new Date()));
                             }
                             break;
                         case 'name':
@@ -172,8 +175,9 @@ client.on('message', msg => {
         }
     } else if(msg.content.includes(name)) {
         msg.reply(
-            `Hey ${msg.author.username}. I don't think that I understood you. You may ask @ProfHaxx if he can translate it to me.\n` + 
-            `At the moment I understand following commands (with the prefix ${prefix}): man, whoami, profhaxx.`
+            `${constant.getGreeting()} ${msg.author.username}. I don't think that I understood you. You may ask @ProfHaxx if he can translate it to me.\n` + 
+            `At the moment I understand following commands (with the prefix ${prefix}): man, whois, profhaxx. I am really basic and still ` + 
+            `in W.I.P. state. My Current Version is: ${version}.`
             );
     }
 });
