@@ -212,13 +212,17 @@ client.on('message', msg => {
                 break;
             case 'help':
                 msg.reply(`This is just a list of all available commands. To get further information for a command use: \"${prefix}man command\"\n` + 
-                `man - Quick Reference for all Commands\nwhois - Who is $User?\nday - What's at day.month? \nprofhaxx - What's the dev doing?\ntellme - Entertainment and Facts.\n`);
+                `man - Quick Reference for all Commands\n` + 
+                `whois - Who is $User?\n` + 
+                `day - What's at day.month? \n` + 
+                `profhaxx - What's the dev doing?\n` + 
+                `tellme - Entertainment and Facts.\n`);
                 break;
             default:
                 msg.reply('Maybe a typo, maybe not... In either case: I couldn\'t understand you.');
         }
     } else if(msg.content.includes(name)) {
-        if(msg.content.includes("Who") && msg.content.includes("smartest")) {
+        if(msg.content.toLowerCase().includes("who") && msg.content.toLowerCase().includes("smartest")) {
             msg.reply(`Yooouuuu!`);
         } else {
             msg.reply(
