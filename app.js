@@ -149,7 +149,10 @@ client.on('message', msg => {
                             msg.reply(`@seoyunah is a very talented musician and likes bread.`);
                             break;
                         case 'Frost':
-                            msg.reply(`@Frost`);
+                            msg.reply(`@Frost is a great artist in terms of art as well as music and an aspiring mathematician and programmer.`);
+                            break;
+                        default:
+                            msg.reply(`User ${args[1]} was not found!`);
                             break;
                     }
                 }
